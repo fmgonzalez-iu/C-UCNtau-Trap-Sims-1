@@ -156,7 +156,7 @@ fixedResult fixedEffDaggerHitTime(std::vector<double> state, double dt) {
         prevState = state;
         symplecticStep(state, dt, energy);
         t = t + dt;
-        if(t - SETTLINGTIME > deathTime) {
+        if(t - SETTLINGTIME - CLEANINGTIME > deathTime) {
             res.energy = energy;
             res.t = t;
             res.ePerp = state[4]*state[4]/(2*MASS_N);
@@ -189,7 +189,7 @@ fixedResult fixedEffDaggerHitTime(std::vector<double> state, double dt) {
             double predX = prevState[0] + fracTravel * (state[0] - prevState[0]);
             double predZ = prevState[2] + fracTravel * (state[2] - prevState[2]);
             
-            double zOff = zOffDipCalc(t - SETTLINGTIME);
+            double zOff = zOffDipCalc(t - SETTLINGTIME - CLEANINGTIME);
             
             if(checkDagHit(predX, 0.0, predZ, zOff)) {
                 nHit += 1;
