@@ -1,7 +1,8 @@
 #define INITBLOCK 0
 
 //#define TRACKGENERATOR randomPointTrapEdE
-#define TRACKGENERATOR randomPointTrapOptimum
+//#define TRACKGENERATOR randomPointTrapOptimum
+#define TRACKGENERATOR randomPointTrapEdEHigh
 
 //#define TRACKER daggerHitTimes
 #define TRACKER fixedEffDaggerHitTime
@@ -9,11 +10,13 @@
 //#define WRITER writeNoabsRes
 #define WRITER writeFixedRes
 
-#define SETTLINGTIME 150
+#define SETTLINGTIME 100
 
-#define FIRSTDIPTIME 1400
+#define CLEANINGTIME 50
 
-#define HOLDTIME 1400
+#define FIRSTDIPTIME 20
+
+#define HOLDTIME 20
 
 //9 Dip
 //#define NDIPS 10
