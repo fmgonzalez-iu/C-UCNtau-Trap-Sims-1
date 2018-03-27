@@ -128,6 +128,26 @@ fixedResult fixedEffDaggerHitTime(std::vector<double> state, double dt) {
         t = t + dt;
     }
     
+    numSteps = CLEANINGTIME/dt;
+    for(int i = 0; i < numSteps; i++) {
+        if(state[2] >= (-1.5 + 0.38) && state[1] > 0) {
+            res.energy = res.eStart;
+            res.t = t;
+            res.ePerp = state[5]*state[5]/(2*MASS_N);
+            res.x = state[0];
+            res.y = state[1];
+            res.z = state[2];
+            res.zOff = -1;
+            res.nHit = 0;
+            res.nHitHouseLow = 0;
+            res.nHitHouseHigh = 0;
+            res.deathTime = deathTime;
+            return res;
+        }
+        symplecticStep(state, dt, energy);
+        t = t + dt;
+    }
+    
     int nHit = 0;
     int nHitHouseLow = 0;
     int nHitHouseHigh = 0;
@@ -147,6 +167,20 @@ fixedResult fixedEffDaggerHitTime(std::vector<double> state, double dt) {
             res.nHit = nHit;
             res.nHitHouseLow = nHitHouseLow;
             res.nHitHouseHigh = nHitHouseHigh;
+            res.deathTime = deathTime;
+            return res;
+        }
+        if(state[2] >= (-1.5 + 0.38) && state[1] > 0) {
+            res.energy = res.eStart;
+            res.t = t;
+            res.ePerp = state[5]*state[5]/(2*MASS_N);
+            res.x = state[0];
+            res.y = state[1];
+            res.z = state[2];
+            res.zOff = -1;
+            res.nHit = 0;
+            res.nHitHouseLow = 0;
+            res.nHitHouseHigh = 0;
             res.deathTime = deathTime;
             return res;
         }
